@@ -14,7 +14,7 @@ except Exception as e:
 
 
 if session:
-    my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME")).to_pandas()
+    my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"),col("SEARCH_ON")).to_pandas()
     fruit_options = my_dataframe["FRUIT_NAME"].tolist()
 else:
     fruit_options = []
@@ -78,6 +78,7 @@ if st.session_state.selected_ingrediants:
 
     for fruit_chosen in st.session_state.selected_ingrediants:
         ingrediants_string_response +=fruit_chosen + ''
+        search_on = my_dataframe.loc[my_dataframe['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
         st.subheader(fruit_chosen+' Nutrition Information')
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+fruit_chosen)
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+search_on)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
