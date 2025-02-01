@@ -1,12 +1,12 @@
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write("Choose the fruits you want in your Smoothie!")
 
 try:
-    session = get_active_session()
+    cnx = st.connection("snowflake")
+    session = cnx.session()
 except Exception as e:
     st.error("Could not connect to Snowflake. Please check your connection.")
     session = None 
