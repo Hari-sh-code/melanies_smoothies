@@ -56,7 +56,10 @@ if time_to_insert:
     elif not st.session_state.selected_ingrediants:
         st.error("Please select at least one ingredient for your smoothie!")
     else:
-        ingrediants_string = ", ".join(st.session_state.selected_ingrediants)
+        ingrediants_string = ''
+
+        for fruit_choosen in st.session_state.selected_ingrediants:
+            ingrediants_string += fruit_choosen + ' '
         
         
         my_insert_stmt = """
