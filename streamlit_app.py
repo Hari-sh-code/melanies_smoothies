@@ -13,8 +13,8 @@ except Exception as e:
 
 
 if session:
-    my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME")).collect()
-    fruit_options = [row["FRUIT_NAME"] for row in my_dataframe]
+    my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME")).to_pandas()
+    fruit_options = my_dataframe["FRUIT_NAME"].tolist()
 else:
     fruit_options = []
 
