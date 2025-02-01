@@ -1,5 +1,6 @@
 import streamlit as st
 from snowflake.snowpark.functions import col
+import requests
 
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write("Choose the fruits you want in your Smoothie!")
@@ -71,3 +72,6 @@ if time_to_insert:
                 st.error("Snowflake session is not available. Please check your connection.")
         except Exception as e:
             st.error(f"Error submitting order: {e}")
+
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
