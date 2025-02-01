@@ -79,5 +79,5 @@ if st.session_state.selected_ingrediants:
     for fruit_chosen in st.session_state.selected_ingrediants:
         ingrediants_string_response +=fruit_chosen + ''
         st.subheader(fruit_chosen+' Nutrition Information')
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon"+fruit_chosen)
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+fruit_chosen)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
